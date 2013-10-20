@@ -62,15 +62,45 @@
 	  return -1;
 	}; 
   }
-	
+
+  /**
+  *  Create the string equivalent of a li element for an awesome-font icon
+  *
+  * @method awesome 
+  * @param ico {string} name of icon.
+  * @return {string} A string representing an li element with the class attribute set to "icon-' + ico + '"
+  */
   var awesome = function (ico) { return '<i class="icon-' + ico + '"></i>'; };
-	
+
+  /**
+  * This serves as the constructor for the helper library. 
+  *
+  * @constructor 
+  */
   function Helper(){};
-	
-  Helper.prototype.member = function(ls, v){ return (ls.indexOf(v) != -1); };
-	
+
+  /**
+  *  Check if an element exists in an array
+  *
+  * @method member 
+  * @param myArray {Array} The array we are searching against.
+  * @param elem {string} The element we want to find in the array
+  * @return {int} Returns index of the element if it is in the array,otherwise it returns -1
+  */
+  Helper.prototype.member = function(myArray, elem){ return (myArray.indexOf(elem) != -1); };
+
+  /**
+  *  Expose the awesome function that is in this context to other contexts that are going to be using the Helper library
+  */
   Helper.prototype.awesome = awesome;
 	
+  /**
+  *  Get a single or multiple icons 
+  *
+  * @method getIcon 
+  * @param allcats {string} A string of icons deliminated by ','.
+  * @return {string} Returns a string of icons as html elements.
+  */
   Helper.prototype.getIcon = function(allcats){
 	var cats = allcats.split(","),
 	  result = "";
@@ -87,7 +117,14 @@
 	}
     return result;
   };
-	
+
+  /**
+  *  Checks if an assignment has been released
+  *
+  * @method isReleased 
+  * @param after {date} A string of icons deliminated by ','.
+  * @return {bool} Returns true if the assignment is released and false if it hasn't
+  */
   Helper.prototype.isReleased = function(after){
   
 	/**
@@ -113,6 +150,13 @@
 	}
   };
 	
+  /**
+  *  Gets number of days until due date for a future assignment 
+  *
+  * @method onlyInFuture 
+  * @param due {date} A future date.
+  * @return {string} Returns number of days from future date
+  */
   Helper.prototype.onlyInFuture = function(due){
     var m,returnText = "";
     m = parseDueDate(due);
@@ -124,8 +168,22 @@
 	return returnText;
   };
 	
+  /**
+  *  Checks if the date is a valid date
+  *
+  * @method isValidDueDate 
+  * @param due {date} A date.
+  * @return {string} Returns true if date is valid,otherwise returns false
+  */
   Helper.prototype.isValidDueDate = function(due){ return (due.length == 12 || due.length == 8); };
-	
+
+  /**
+  *  Date formatting 
+  *
+  * @method parseDueDate 
+  * @param due {date} A date.
+  * @return {date} Returns date in YYYYMMDDHHmm or YYYYMMDD format 
+  */
   Helper.prototype.parseDueDate = function(due){
 	var m;
 	if (due.length == 12) {
@@ -133,10 +191,17 @@
 	} else if (due.length == 8) {
 	  m = window.moment(due, "YYYYMMDD");
 	}
-
 	return m;
   };
 	
+  /**
+  *  Get the color for an assignment
+  *  Red: less than or equal to 5 days, Yellow: less than or equal to 8 days, Green: more than or equal to 9 days
+  *
+  * @method getRangeColor 
+  * @param due {mom} A date.
+  * @return {string} Returns the appropriate label-* depending on which color range the date falls. 
+  */ 
   Helper.prototype.getRangeColor = function (mom) {
 	var difference = mom.diff(window.moment(), 'days');
 	if (difference >= 0) {
