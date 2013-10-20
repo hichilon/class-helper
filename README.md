@@ -1,8 +1,8 @@
 class-helper
 ============
 
-The helper library uses [moment.js](http://momentjs.com/) and other techniques to manipulates dates
-so that class assignments and other listings appear to be dynamically generated when infact there are provided statically. 
+The helper library uses [moment.js](http://momentjs.com/) and other techniques to manipulate dates
+so that class assignments and other listings appear to be dynamically generated when infact they are provided statically. 
 
 **Demos** are the best way to see this concept in practice:
 
